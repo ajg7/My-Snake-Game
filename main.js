@@ -8,6 +8,9 @@ window.onload = function() {
     let snakeW = 10;
     let snakeH = 10;
 
+    //score
+    let score = 4;
+
     //default direction
     let direction = "right";
 
@@ -49,6 +52,36 @@ window.onload = function() {
             }
         );
     }
+    //create some food
+    food = {
+        x : Math.round(Math.random()*(cvsW/snakeW-1)+1),
+        y : Math.round(Math.random()*(cvsH/snakeH-1)+1)
+    }
+
+    //draw food function
+    function drawFood(x,y) {
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    
+        ctx.fillStyle = "#000";
+        ctx.strokeRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    }
+
+    //check collision function
+    function checkCollision(x,y,array) {
+        for(let i = 0; i< array.length; i++) {
+            if(x == array[i].x && y == array[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function drawScore(x) {
+        ctx.fillStyle = "yellow";
+        ctx.font = "15px Verdana";
+        ctx.fillText("score : "+x, 5, cvsH-5);
+    }
     function draw() {
         ctx.clearRect(0,0,cvsW,cvsH);
         for(let i = 0; i < snake.length; i++) {
@@ -56,10 +89,19 @@ window.onload = function() {
             let y = snake[i].y;
             drawSnake(x,y);
         }
+        //draw Food
+        drawFood(food.x,food.y);
+
         //snake head
         let snakeX = snake[0].x;
         let snakeY = snake[0].y;
 
+
+        //if the snake hits the wall, it's game over
+        if(snakeX < 0 || snakeY < 0 || snakeX >= cvsW/snakeW || snakeY >= cvsH/snakeH ||
+        checkCollision(snakeX, snakeY,snake)) {
+            location.reload();
+        }
         //remove to last entry (the snake tail)
         snake.pop();
 
@@ -73,15 +115,28 @@ window.onload = function() {
             snakeX++;
         }else if(direction =="down") {snakeY++;}
 
+        //if out snake eats the food
+        if(snakeX == food.x && snakeY == food.y) {
+            food = {
+                x : Math.round(Math.random()*(cvsW/snakeW-1)+1),
+                y : Math.round(Math.random()*(cvsH/snakeH-1)+1)
+            }
+            let newHead = {
+                x : snakeX,
+                y : snakeY
+            };
+            score++;
+        }else{
+            snake.pop();
+            let newHead = {
+                x : snakeX,
+                y : snakeY
+            };
+        }
 
-
-        let newHead = {
-            x : snakeX,
-            y : snakeY
-        };
 
         snake.unshift(newHead);
-
+        drawScore(score);
     }
     
     setInterval(draw,60);
