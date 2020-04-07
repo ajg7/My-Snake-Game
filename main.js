@@ -37,7 +37,7 @@ window.onload = function() {
     }
 
     function drawSnake(x,y) {
-        ctx.fillStyle = "#EE82EE";
+        ctx.fillStyle = "blue";
         ctx.fillRect(x*snakeW,y*snakeH,snakeW,snakeH);
     
         ctx.fillStyle = "#000";
@@ -66,7 +66,7 @@ window.onload = function() {
 
     //draw food function
     function drawFood(x,y) {
-        ctx.fillStyle = "yellow";
+        ctx.fillStyle = "red";
         ctx.fillRect(x*snakeW,y*snakeH,snakeW,snakeH);
     
         ctx.fillStyle = "#000";
@@ -123,7 +123,11 @@ window.onload = function() {
                 x : Math.floor(Math.random()*(cvsW/snakeW-1)+1),
                 y : Math.floor(Math.random()*(cvsH/snakeH-1)+1)
             }
-            
+            let newHead = {
+                x : snakeX,
+                y : snakeY
+            };
+            score++;
             // we don't remove the tail
         }else{
             // remove the tail
