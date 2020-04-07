@@ -100,8 +100,7 @@ window.onload = function() {
 
 
         //if the snake hits the wall, it's game over
-        if(snakeX < 0 || snakeY < 0 || snakeX >= cvsW/snakeW || snakeY >= cvsH/snakeH ||
-        checkCollision(snakeX, snakeY,snake)) {
+        if(snakeX < 0 || snakeY < 0 || snakeX >= cvsW/snakeW || snakeY >= cvsH/snakeH) {
             location.reload();
         }
         
@@ -112,6 +111,11 @@ window.onload = function() {
         else if(direction =="up") snakeY--;
         else if(direction =="right") snakeX++;
         else if(direction =="down") snakeY++;
+        
+        let newHead = {
+                x : snakeX,
+                y : snakeY
+            };
 
         //if our snake eats the food
         if(snakeX == food.x && snakeY == food.y){
@@ -119,11 +123,7 @@ window.onload = function() {
                 x : Math.floor(Math.random()*(cvsW/snakeW-1)+1),
                 y : Math.floor(Math.random()*(cvsH/snakeH-1)+1)
             }
-            let newHead = {
-                x : snakeX,
-                y : snakeY
-            };
-            score++;
+            
             // we don't remove the tail
         }else{
             // remove the tail
