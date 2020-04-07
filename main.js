@@ -11,12 +11,18 @@ window.onload = function() {
     //score
     let score = 4;
 
+    function drawScore(x) {
+        ctx.fillStyle = "yellow";
+        ctx.font = "15px Verdana";
+        ctx.fillText("score : "+x, 5, cvsH-5);
+    }
+
     //default direction
     let direction = "right";
 
     //read users directions
 
-    this.document.addEventListener("keydown",getDirection);
+    document.addEventListener("keydown",getDirection);
 
     function getDirection(e) {
         if(e.keyCode == 37 && direction != "right") {
@@ -68,27 +74,23 @@ window.onload = function() {
     }
 
     //check collision function
-    function checkCollision(x,y,array) {
-        for(let i = 0; i< array.length; i++) {
-            if(x == array[i].x && y == array[i].y) {
+    function collision(x,y,array){
+        for(let i = 0; i < array.length; i++){
+            if(x == array[i].x && y == array[i].y){
                 return true;
             }
         }
         return false;
     }
-
-    function drawScore(x) {
-        ctx.fillStyle = "yellow";
-        ctx.font = "15px Verdana";
-        ctx.fillText("score : "+x, 5, cvsH-5);
-    }
     function draw() {
         ctx.clearRect(0,0,cvsW,cvsH);
-        for(let i = 0; i < snake.length; i++) {
-            let x = snake[i].x;
-            let y = snake[i].y;
-            drawSnake(x,y);
+            for(let i = 0; i < snake.length; i++) {
+                 let x = snake[i].x;
+                 let y = snake[i].y;
+                 drawSnake(x,y);
         }
+
+   
         //draw Food
         drawFood(food.x,food.y);
 
@@ -102,38 +104,35 @@ window.onload = function() {
         checkCollision(snakeX, snakeY,snake)) {
             location.reload();
         }
-        //remove to last entry (the snake tail)
-        snake.pop();
+        
 
         //create a new head, based on the previous head and the direction
 
-        if (direction == "left") {
-            snakeX--;
-        }else if(direction =="up") {
-            snakeY--;
-        }else if(direction =="right") {
-            snakeX++;
-        }else if(direction =="down") {snakeY++;}
+        if (direction == "left") snakeX--;
+        else if(direction =="up") snakeY--;
+        else if(direction =="right") snakeX++;
+        else if(direction =="down") snakeY++;
 
-        //if out snake eats the food
-        if(snakeX == food.x && snakeY == food.y) {
+        //if our snake eats the food
+        if(snakeX == food.x && snakeY == food.y){
             food = {
-                x : Math.round(Math.random()*(cvsW/snakeW-1)+1),
-                y : Math.round(Math.random()*(cvsH/snakeH-1)+1)
+                x : Math.floor(Math.random()*(cvsW/snakeW-1)+1),
+                y : Math.floor(Math.random()*(cvsH/snakeH-1)+1)
             }
             let newHead = {
                 x : snakeX,
                 y : snakeY
             };
             score++;
+            // we don't remove the tail
         }else{
+            // remove the tail
             snake.pop();
             let newHead = {
                 x : snakeX,
                 y : snakeY
             };
         }
-
 
         snake.unshift(newHead);
         drawScore(score);
