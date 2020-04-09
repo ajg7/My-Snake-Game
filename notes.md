@@ -31,7 +31,11 @@ Used the ctx variable with 3 methods, **fillStyle** (color to the text), font, a
     }
 ```
 
+The variable direction is declared as the default
 
+Then we set up a addEventListener(event, f). We can either use "keydown" or "click" for the event. The function we then define as getDirection(e). e is the keycode
+
+We set up conditionals for each keycode the player presses. Doing the && direction != "right" makes sure that players cannot go backwards.
 
 ```JavaScript
   //default direction
