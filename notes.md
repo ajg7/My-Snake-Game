@@ -15,3 +15,41 @@ window.onload = function() {
     let snakeH = 10;
 
 ```
+
+Declared score as 4
+
+Used the ctx variable with 3 methods, **fillStyle** (color to the text), font, and **fillText** (draws a text string at the specified coordinates[(text, x, and y)])
+
+```JavaScript
+ //score
+    let score = 4;
+
+    function drawScore(x) {
+        ctx.fillStyle = "yellow";
+        ctx.font = "15px Verdana";
+        ctx.fillText("score : "+x, 5, cvsH-5);
+    }
+```
+
+
+
+```JavaScript
+  //default direction
+    let direction = "right";
+
+    //read users directions
+
+    document.addEventListener("keydown",getDirection);
+
+    function getDirection(e) {
+        if(e.keyCode == 37 && direction != "right") {
+            direction ="left";
+        }else if(e.keyCode == 38 && direction != "down") {
+            direction ="up";
+        }else if(e.keyCode == 39 && direction != "left") {
+            direction ="right";
+        }else if(e.keyCode == 40 && direction != "up") {
+            direction ="down";
+        }
+    }
+```
