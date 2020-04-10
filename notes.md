@@ -57,3 +57,34 @@ We set up conditionals for each keycode the player presses. Doing the && directi
         }
     }
 ```
+
+declaring the function drawSnake().
+Inside the function has the variable ctx and methods associated with them. fillStyle = color, gradient, or pattern of shapes in the canvas; 
+fillRect defines the rectangle within the canvas; 
+strokeRect draws a stroked rectangle whose starting point is at (x, y) and whose size is specified by width and height.
+
+
+```JavaScript
+ function drawSnake(x,y) {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    
+        ctx.fillStyle = "#000";
+        ctx.strokeRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    }
+
+
+    //create our snake object, it will contain 4 cells in default
+
+    const len = 4;
+    const snake = [];
+
+    for(let i = len-1; i>=0; i--) {
+        snake.push(
+            {
+               x : i,
+               y : 0
+            }
+        );
+    }
+```
