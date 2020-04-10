@@ -60,8 +60,14 @@ We set up conditionals for each keycode the player presses. Doing the && directi
 
 declaring the function drawSnake().
 Inside the function has the variable ctx and methods associated with them. fillStyle = color, gradient, or pattern of shapes in the canvas; 
+
 fillRect defines the rectangle within the canvas; 
+
 strokeRect draws a stroked rectangle whose starting point is at (x, y) and whose size is specified by width and height.
+
+declare a constant called len which is the length of the snake & an empty array
+
+a for loop that pushes "rectangles" to the snake. These are objects. It goes x:3,y:0 , x:2, y:0 , x:1, y:0 , x:0, y:0
 
 
 ```JavaScript
@@ -87,4 +93,28 @@ strokeRect draws a stroked rectangle whose starting point is at (x, y) and whose
             }
         );
     }
+```
+
+declaring a food object. Keys are x & y; Values are math methods. Math.round = rounds the result of Math.random times the result of (cvsW/snakeW-1) + 1. This allows the location to be randomly placed.
+
+The food function creates the food
+
+
+```JavaScript
+ //create some food
+    food = {
+        x : Math.round(Math.random()*(cvsW/snakeW-1)+1),
+        y : Math.round(Math.random()*(cvsH/snakeH-1)+1)
+    }
+
+    //draw food function
+    function drawFood(x,y) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    
+        ctx.fillStyle = "#000";
+        ctx.strokeRect(x*snakeW,y*snakeH,snakeW,snakeH);
+    }
+     //draw Food
+        drawFood(food.x,food.y);
 ```
