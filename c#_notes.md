@@ -1,5 +1,5 @@
 
-##Drawing a Shape
+##Drawing a Shape##
 ```C#
 //C# set up will automatically have
 //The file is called Program.cs
@@ -31,7 +31,7 @@ namespace Giraffe
      }
 }
 ```
-##Variables
+##Variables##
 ```C#
 using System;
 using System.Collections.Generic;
