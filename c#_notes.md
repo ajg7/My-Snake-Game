@@ -1,4 +1,4 @@
 ```C#
-num range = 5;
+int range = 5;
 
 ```
